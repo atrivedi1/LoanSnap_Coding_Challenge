@@ -20,8 +20,6 @@ Output
 
 */
 
-const expect = require('chai').expect;
-
 const letterValues = {
   a: 1, 
   b: 2,
@@ -53,7 +51,7 @@ const letterValues = {
 
 function matchingSubstrings(input, targeted_values, num_targets) {
   //If input value is empty, return false for all target values
-  if(input === "") {
+  if(!input || input === "") {
     return new Array(num_targets).fill(false);
   }
  
@@ -114,75 +112,6 @@ function addStringToHash(val, string, hash) {
   }
 }
 
-////////////////////////////////////////////////////////////
-///////////////  DO NOT TOUCH TEST BELOW!!!  ///////////////
-////////////////////////////////////////////////////////////
-
-// code for capturing console.log output
-describe('Uniform Substrings - Tests', function () {
-
-  it('should handle sample input, target_values, and num_targets provided by LoanSnap', function () {
-    // 1. ARRANGE
-    let input = "abbccaadf";
-    let target_values =  [4,2,5,3,7];
-    let num_targets = target_values.length;
-  
-    // 2. ACT
-    let ans = matchingSubstrings(input, target_values, num_targets);
-
-    // 3. ASSERT
-    expect(ans).to.be.eql([true, true, false, true, false]);
-  });
-
-  it('should handle input length of 1 when target value IS found', function () {
-    // 1. ARRANGE
-    let input = "a";
-    let target_values = [1];
-    let num_targets = target_values.length;
-  
-    // 2. ACT
-    let ans = matchingSubstrings(input, target_values, num_targets);
-
-    // 3. ASSERT
-    expect(ans).to.be.eql([true]);
-  });
-
-  it('should handle input length of 1 when target value is NOT found', function () {
-    // 1. ARRANGE
-    let input = "a";
-    let target_values = [4];
-    let num_targets = target_values.length;
-  
-    // 2. ACT
-    let ans = matchingSubstrings(input, target_values, num_targets);
-
-    // 3. ASSERT
-    expect(ans).to.be.eql([false]);
-  });
-
-  it('should handle case where num_targets greater than input length', function () {
-    // 1. ARRANGE
-    let input = "aff";
-    let target_values =  [8,12,3,1];
-    let num_targets = target_values.length;
-  
-    // 2. ACT
-    let ans = matchingSubstrings(input, target_values, num_targets);
-
-    // 3. ASSERT
-    expect(ans).to.be.eql([false, true, false, true]);
-  });
-
-  it('should handle long input', function () {
-    // 1. ARRANGE
-    let input = "aspodifuaospdifupaaopiccccsiidifjaafjfkkkkjswjefjhghaiwa";
-    let target_values =  [1,14,3,10,8,5,12,9,11,2];
-    let num_targets = target_values.length;
-  
-    // 2. ACT
-    let ans = matchingSubstrings(input, target_values, num_targets);
-
-    // 3. ASSERT
-    expect(ans).to.be.eql([true, false, true, true, true, true, true, true, true, true]);
-  });
-});
+module.exports = {
+  matchingSubstrings: matchingSubstrings
+}

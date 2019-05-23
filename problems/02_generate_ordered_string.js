@@ -35,11 +35,9 @@ Output
  -O(NLog(N))
 */
 
-const expect = require('chai').expect;
-
 function generateString(elements, num_of_elements) {
   //replace _s in first half of input array w/ "*"
-  let midPoint = num_of_elements/2;
+  let midPoint = Math.floor(num_of_elements/2);
 
   for(let i = 0; i < midPoint; i++) {
     elements[i][1] = "*";
@@ -86,106 +84,6 @@ function merge(left, right) {
   return result.concat(left.length ? left : right);
 }
 
-////////////////////////////////////////////////////////////
-///////////////  DO NOT TOUCH TEST BELOW!!!  ///////////////
-////////////////////////////////////////////////////////////
-
-// code for capturing console.log output
-describe('Generate Ordered String - Tests', function () {
-
-  it('should handle sample input _array provided by LoanSnap', function () {
-    // 1. ARRANGE
-    let _array = [[0, "op"],[1, "iii"],[2, "t"],[0, "hello"],[3, "world"],[3, "everyone"]]
-    let num_elements = _array.length;
-  
-    // 2. ACT
-    let ans = generateString(_array, num_elements);
-
-    // 3. ASSERT
-    expect(ans).to.be.equal("* hello * * world everyone");
-  });
-
-  it('should handle input of length 2 where first element is higher priority than second', function () {
-    // 1. ARRANGE
-    let _array = [[0, "goodbye"], [1, "hello"]]
-    let num_elements = _array.length;
-  
-    // 2. ACT
-    let ans = generateString(_array, num_elements);
-
-    // 3. ASSERT
-    expect(ans).to.be.equal("* hello");
-
-  });
-
-  it('should handle input of length 2 where first element is lower priority than second', function () {
-    // 1. ARRANGE
-    let _array = [[4, "goodbye"], [1, "hello"]]
-    let num_elements = _array.length;
-  
-    // 2. ACT
-    let ans = generateString(_array, num_elements);
-
-    // 3. ASSERT
-    expect(ans).to.be.equal("hello *");
-
-  });
-
-  it('should maintain order, even if all elements in input have same priority', function () {
-    // 1. ARRANGE
-    let _array = [[0, "oo"], [0, "hi"], [0, "hello"], [0, "world"], [0, "it's"], [0, "a"], [0, "beautiful"], [0, "day"]]
-    let num_elements = _array.length;
-  
-    // 2. ACT
-    let ans = generateString(_array, num_elements);
-
-    // 3. ASSERT
-    expect(ans).to.be.equal("* * * * it's a beautiful day");
-  });
-
-  it('should handle long input with random priority levels', function () {
-    // 1. ARRANGE
-    let _array = [
-      [9, "a"], //*
-      [1, "b"], //*
-      [5, "c"], //*
-      [0, "d"], //*
-      [3, "e"], //*
-      [2, "f"], //*
-      [8, "g"], //*
-      [6, "h"], //*
-      [6, "i"], //*
-      [1, "j"], //*
-      [2, "k"], //*
-      [8, "l"], //*
-      [7, "m"], //*
-      [4, "n"], //*
-      [0, "o"], //*
-      [1, "p"], //*
-      [5, "q"], 
-      [9, "r"],
-      [9, "s"],
-      [2, "t"],
-      [0, "u"],
-      [10, "v"],
-      [4, "w"],
-      [3, "x"],
-      [2, "y"],
-      [8, "z"],
-      [4, "aa"],
-      [6, "ab"],
-      [1, "ac"],
-      [3, "ad"],
-      [7, "ae"],
-      [0, "af"]
-    ]
-
-    let num_elements = _array.length;
-  
-    // 2. ACT
-    let ans = generateString(_array, num_elements);
-
-    // 3. ASSERT
-    expect(ans).to.be.equal("* * u af * * * ac * * t y * x ad * w aa * q * * ab * ae * * z * r s v");
-  });
-});
+module.exports = {
+  generateString: generateString
+}
